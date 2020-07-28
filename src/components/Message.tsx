@@ -15,16 +15,16 @@ interface Props {
 const Message: FC<Props> = ({ msg, user }) => {
 	const classes = useStyles();
 	const isUser = user === msg.user;
-	console.log(isUser);
 
 	return (
-		<Card className={`message ${isUser ? 'message__user' : 'message__guest'}`}>
-			<CardContent>
-				<Typography color='textSecondary' variant='h5' component='h2'>
-					{msg.user} : {msg.text}
+		<div className={`message ${isUser ? 'message__user' : 'message__guest'}`}>
+			{!isUser && <div className='message__user'>{msg.user}</div>}
+			<div className='message__content'>
+				<Typography variant='h5' component='h2'>
+					{msg.text}
 				</Typography>
-			</CardContent>
-		</Card>
+			</div>
+		</div>
 	);
 };
 

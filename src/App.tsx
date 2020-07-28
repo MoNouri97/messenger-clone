@@ -2,14 +2,25 @@ import React, { useState, useEffect } from 'react';
 import './App.css';
 import Message from './components/Message';
 import { Button, FormControl, InputLabel, Input } from '@material-ui/core';
-
+import { db } from './components/firebase';
+import firebase from 'firebase';
+interface Message {
+	text: string;
+	user: string;
+}
 function App() {
 	const [msg, setMsg] = useState('');
-	const [messages, setMessages] = useState<{ text: string; user: string }[]>([
+	const [messages, setMessages] = useState<any[]>([
 		{ text: 'hi', user: 'nouri' },
 	]);
 	const [userName, setUserName] = useState('');
+
 	useEffect(() => {
+		db.collection('messages')
+			.orderBy('timestamp')
+			.onSnapshot((snapshot) => {
+				setMessages(snapshot.docs.map((doc) => doc.data()));
+			});
 		setUserName(prompt('user name ?')!);
 	}, []);
 
@@ -19,7 +30,12 @@ function App() {
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
-		setMessages([...messages, { text: msg, user: userName }]);
+		db.collection('messages').add({
+			text: msg,
+			user: userName,
+			timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+		});
+		// setMessages([...messages, { text: msg, user: userName }]);
 		setMsg('');
 	};
 
@@ -28,6 +44,10 @@ function App() {
 			<h1>
 				Hello World <span>👌</span>
 			</h1>
+
+			{messages.map((m, i) => (
+				<Message user={userName} key={i} msg={m}></Message>
+			))}
 			<form onSubmit={handleSubmit}>
 				<FormControl>
 					<InputLabel>Email address</InputLabel>
@@ -47,9 +67,6 @@ function App() {
 					</Button>
 				</FormControl>
 			</form>
-			{messages.map((m, i) => (
-				<Message user={userName} key={i} msg={m}></Message>
-			))}
 		</div>
 	);
 }
