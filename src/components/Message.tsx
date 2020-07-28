@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, forwardRef } from 'react';
 import { Card, CardContent, Typography, makeStyles } from '@material-ui/core';
 import './Message.css';
 const useStyles = makeStyles({
@@ -10,22 +10,28 @@ const useStyles = makeStyles({
 interface Props {
 	msg: { text: string; user: string };
 	user: string;
+	order: number;
 }
 
-const Message: FC<Props> = ({ msg, user }) => {
-	const classes = useStyles();
-	const isUser = user === msg.user;
-
-	return (
-		<div className={`message ${isUser ? 'message__user' : 'message__guest'}`}>
-			{!isUser && <div className='message__user'>{msg.user}</div>}
-			<div className='message__content'>
-				<Typography variant='h5' component='h2'>
-					{msg.text}
-				</Typography>
+const Message = forwardRef<HTMLDivElement, Props>(
+	({ msg, user, order }, ref) => {
+		const classes = useStyles();
+		const isUser = user === msg.user && msg.user;
+		return (
+			<div
+				ref={ref}
+				className={`message 
+				${isUser ? 'message__user' : 'message__guest'} 
+				${order == 0 ? 'first' : ''} 
+				${order == -1 ? 'last' : ''}`}
+			>
+				{!isUser && (
+					<div className='message__userName'>{msg.user || 'anonymous'}</div>
+				)}
+				<div className='message__content'>{msg.text}</div>
 			</div>
-		</div>
-	);
-};
+		);
+	},
+);
 
 export default Message;

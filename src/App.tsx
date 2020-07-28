@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import Message from './components/Message';
 import { Button, FormControl, InputLabel, Input } from '@material-ui/core';
 import { db } from './components/firebase';
 import firebase from 'firebase';
+import FlipMove from 'react-flip-move';
+import SendIcon from '@material-ui/icons/Send';
+import { IconButton } from '@material-ui/core';
+
 interface Message {
 	text: string;
 	user: string;
 }
 function App() {
 	const [msg, setMsg] = useState('');
-	const [messages, setMessages] = useState<any[]>([
-		{ text: 'hi', user: 'nouri' },
-	]);
-	const [userName, setUserName] = useState('');
+	const [messages, setMessages] = useState<any[]>([]);
+	const [userName, setUserName] = useState('mo');
 
 	useEffect(() => {
 		db.collection('messages')
@@ -23,6 +25,9 @@ function App() {
 			});
 		setUserName(prompt('user name ?')!);
 	}, []);
+	useEffect(() => {
+		if (bottomRef) bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+	}, [messages]);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setMsg(e.target.value);
@@ -39,34 +44,48 @@ function App() {
 		setMsg('');
 	};
 
+	const bottomRef = useRef<HTMLDivElement>(null);
+	let order = 0;
 	return (
 		<div className='App'>
-			<h1>
-				Hello World <span>👌</span>
-			</h1>
-
-			{messages.map((m, i) => (
-				<Message user={userName} key={i} msg={m}></Message>
-			))}
-			<form onSubmit={handleSubmit}>
-				<FormControl>
-					<InputLabel>Email address</InputLabel>
-					<Input
-						name='message'
-						placeholder='new message'
-						value={msg}
-						onChange={handleChange}
-					/>
-					<Button
-						disabled={!msg}
-						variant='outlined'
-						color='primary'
-						type='submit'
-					>
-						Send
-					</Button>
-				</FormControl>
+			<h1>👋 Hello {userName || 'there'}</h1>
+			<FlipMove
+				enterAnimation={{
+					from: {
+						transform: 'scale(0)',
+						opacity: '0.1',
+					},
+					to: {
+						transform: '',
+					},
+				}}
+			>
+				{messages.map((m, i, all) => {
+					order = m.user == all[i - 1]?.user ? order + 1 : 0;
+					order = m.user !== all[i + 1]?.user ? -1 : order;
+					return (
+						<Message user={userName} key={i} msg={m} order={order}></Message>
+					);
+				})}
+			</FlipMove>
+			<form onSubmit={handleSubmit} className='app__form'>
+				<Input
+					className='app__form-grp'
+					name='message'
+					placeholder='new message'
+					value={msg}
+					onChange={handleChange}
+				/>
+				<IconButton
+					color='primary'
+					className='app__form-btn'
+					disabled={!msg}
+					type='submit'
+				>
+					<SendIcon />
+				</IconButton>
 			</form>
+			<div ref={bottomRef}></div>
 		</div>
 	);
 }

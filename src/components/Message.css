@@ -1,30 +1,60 @@
 .message {
 	width: fit-content;
+	max-width: 80vw;
 	margin: 2px 5px;
 }
 .message__user {
 	margin-left: auto;
+	transform-origin: bottom right;
 }
 
 .message__user .message__content {
+	font-family: Nunito !important;
 	color: white !important;
 	background: rgb(1, 132, 255) !important;
 	padding: 15px;
 	border-radius: 30px;
 	text-align: left !important;
 	border-bottom-right-radius: 2px;
+	border-top-right-radius: 2px;
 }
+
+.message__user.first .message__content {
+	border-bottom-right-radius: 2px;
+	border-top-right-radius: 30px;
+}
+.message__user.last .message__content {
+	border-top-right-radius: 2px;
+	border-bottom-right-radius: 30px;
+}
+.message__guest.first .message__content {
+	border-bottom-left-radius: 2px;
+	border-top-left-radius: 30px;
+}
+.message__guest.last .message__content {
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 30px;
+}
+
 .message__guest {
 	margin-right: auto;
+	transform-origin: bottom left;
 }
 .message__guest .message__content {
 	background: rgb(212, 212, 212) !important;
 	padding: 15px;
 	border-radius: 30px;
 	border-bottom-left-radius: 2px;
-	text-align: right !important;
+	border-top-left-radius: 2px;
+	/* border-bottom-left-radius: 2px; */
+	text-align: left !important;
 }
-.message__user {
+
+.message__guest.first .message__userName {
+	display: block;
+}
+.message__userName {
+	display: none;
 	color: gray;
 	text-align: left;
 }

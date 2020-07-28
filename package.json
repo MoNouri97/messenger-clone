@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -11,9 +12,11 @@
     "@types/node": "^12.12.53",
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
+    "@types/react-flip-move": "^2.9.12",
     "firebase": "^7.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-flip-move": "^3.0.4",
     "react-scripts": "3.4.1",
     "typescript": "^3.7.5"
   },
