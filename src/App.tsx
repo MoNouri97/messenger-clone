@@ -12,18 +12,22 @@ interface Message {
 	text: string;
 	user: string;
 }
+
 function App() {
 	const [msg, setMsg] = useState('');
+	const [userName, setUserName] = useState('');
+
 	const [messages, setMessages] = useState<any[]>([]);
-	const [userName, setUserName] = useState('mo');
 
 	useEffect(() => {
-		db.collection('messages')
-			.orderBy('timestamp')
-			.onSnapshot((snapshot) => {
-				setMessages(snapshot.docs.map((doc) => doc.data()));
-			});
 		setUserName(prompt('user name ?')!);
+		setTimeout(() => {
+			db.collection('messages')
+				.orderBy('timestamp')
+				.onSnapshot((snapshot) => {
+					setMessages(snapshot.docs.map((doc) => doc.data()));
+				});
+		}, 100);
 	}, []);
 	useEffect(() => {
 		if (bottomRef) bottomRef.current?.scrollIntoView({ behavior: 'smooth' });

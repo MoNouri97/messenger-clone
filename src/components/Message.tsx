@@ -10,10 +10,6 @@ interface Props {
 
 const Message = forwardRef<HTMLDivElement, Props>(
 	({ msg, user, order }, ref) => {
-		useEffect(() => {
-			console.log('rendered');
-		}, []);
-
 		const isUser = user === msg.user && msg.user;
 		return (
 			<div
