@@ -62,7 +62,7 @@ function App() {
 			>
 				{messages.map((m, i, all) => {
 					order = m.user == all[i - 1]?.user ? order + 1 : 0;
-					order = m.user !== all[i + 1]?.user ? -1 : order;
+					if (order !== 0) order = m.user !== all[i + 1]?.user ? -1 : order;
 					return (
 						<Message user={userName} key={i} msg={m} order={order}></Message>
 					);

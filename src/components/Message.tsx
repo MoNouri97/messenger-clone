@@ -1,11 +1,6 @@
-import React, { FC, forwardRef } from 'react';
+import React, { FC, forwardRef, useEffect } from 'react';
 import { Card, CardContent, Typography, makeStyles } from '@material-ui/core';
 import './Message.css';
-const useStyles = makeStyles({
-	root: {
-		width: 275,
-	},
-});
 
 interface Props {
 	msg: { text: string; user: string };
@@ -15,7 +10,10 @@ interface Props {
 
 const Message = forwardRef<HTMLDivElement, Props>(
 	({ msg, user, order }, ref) => {
-		const classes = useStyles();
+		useEffect(() => {
+			console.log('rendered');
+		}, []);
+
 		const isUser = user === msg.user && msg.user;
 		return (
 			<div

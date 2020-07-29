@@ -7,7 +7,9 @@
 	margin-left: auto;
 	transform-origin: bottom right;
 }
-
+.message .message__content {
+	transition: all 0.3s ease-in-out;
+}
 .message__user .message__content {
 	font-family: Nunito !important;
 	color: white !important;
