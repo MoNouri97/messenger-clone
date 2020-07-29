@@ -15,7 +15,7 @@
 	right: 10px;
 	left: 10px;
 	border-radius: 10px;
-	background: rgb(246, 246, 246);
+	background: rgba(246, 246, 246, 0.9);
 	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.253);
 }
 .app__form-grp {
