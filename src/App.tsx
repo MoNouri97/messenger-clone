@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 import Message from './components/Message';
-import { Button, FormControl, InputLabel, Input } from '@material-ui/core';
+import { Input } from '@material-ui/core';
 import { db } from './components/firebase';
 import firebase from 'firebase';
 import FlipMove from 'react-flip-move';
@@ -65,7 +65,7 @@ function App() {
 				}}
 			>
 				{messages.map((m, i, all) => {
-					order = m.user == all[i - 1]?.user ? order + 1 : 0;
+					order = m.user === all[i - 1]?.user ? order + 1 : 0;
 					if (order !== 0) order = m.user !== all[i + 1]?.user ? -1 : order;
 					return (
 						<Message user={userName} key={i} msg={m} order={order}></Message>

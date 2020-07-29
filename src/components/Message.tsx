@@ -1,5 +1,4 @@
-import React, { FC, forwardRef, useEffect } from 'react';
-import { Card, CardContent, Typography, makeStyles } from '@material-ui/core';
+import React, { forwardRef } from 'react';
 import './Message.css';
 
 interface Props {
@@ -16,8 +15,8 @@ const Message = forwardRef<HTMLDivElement, Props>(
 				ref={ref}
 				className={`message 
 				${isUser ? 'message__user' : 'message__guest'} 
-				${order == 0 ? 'first' : ''} 
-				${order == -1 ? 'last' : ''}`}
+				${order === 0 ? 'first' : ''} 
+				${order === -1 ? 'last' : ''}`}
 			>
 				{!isUser && (
 					<div className='message__userName'>{msg.user || 'anonymous'}</div>
