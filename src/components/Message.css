@@ -1,3 +1,8 @@
+/* :root {
+	--text-color: white;
+	--user-bg: rgb(1, 132, 255);
+	--other-bg: rgb(212, 212, 212);
+} */
 .message {
 	width: fit-content;
 	max-width: 80vw;
@@ -11,8 +16,8 @@
 	transition: all 0.3s ease-in-out;
 }
 .message__user .message__content {
-	color: white !important;
-	background: rgb(1, 132, 255) !important;
+	color: var(--light-text) !important;
+	background: var(--user-bg) !important;
 	padding: 15px;
 	border-radius: 30px;
 	text-align: left !important;
@@ -42,7 +47,8 @@
 	transform-origin: bottom left;
 }
 .message__guest .message__content {
-	background: rgb(212, 212, 212) !important;
+	color: var(--dark-text) !important;
+	background: var(--other-bg) !important;
 	padding: 15px;
 	border-radius: 30px;
 	border-bottom-left-radius: 2px;

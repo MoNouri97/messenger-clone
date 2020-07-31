@@ -13,13 +13,23 @@
 	right: 10px;
 	left: 10px;
 	border-radius: 10px;
-	background: rgba(246, 246, 246, 0.9);
-	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.253);
+	background: var(--light-opacity);
+	box-shadow: 1px 1px 10px var(--shadow);
 }
 .app__form-grp {
 	margin: 20px;
 	flex: 1;
+	color: var(--dark-text);
+}
+Button {
+	color: var(--dark-text) !important;
+}
+Input,
+TextField,
+Label {
+	color: var(--dark-text) !important;
 }
 .app__form-btn {
 	flex: 0;
+	color: var(--dark-text);
 }

@@ -11,7 +11,6 @@ interface Props {
 
 const AddMessage: FC<Props> = ({ userName }) => {
 	const [msg, setMsg] = useState('');
-	const { theme, toggleTheme } = useContext(ThemeContext);
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setMsg(e.target.value);
@@ -27,19 +26,8 @@ const AddMessage: FC<Props> = ({ userName }) => {
 		setMsg('');
 	};
 
-	useEffect(() => {
-		console.log(theme);
-	}, [theme]);
 	return (
 		<form onSubmit={handleSubmit} className='app__form'>
-			<Button
-				onClick={() => {
-					toggleTheme!();
-				}}
-			>
-				Theme
-			</Button>
-
 			<Input
 				className='app__form-grp'
 				name='message'

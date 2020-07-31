@@ -1,7 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+:root {
+	--bg: white;
+	--light-opacity: rgba(246, 246, 246, 0.9);
+	--light-text: white;
+	--dark-text: rgb(0, 0, 0);
+	--user-bg: rgb(1, 132, 255);
+	--other-bg: rgb(212, 212, 212);
+	--shadow: rgba(0, 0, 0, 0.253);
+}
+
 body {
 	margin: 0;
+	padding: 0;
 	font-family: 'Nunito', Arial, Helvetica, serif;
+	color: var(--dark-text);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+}
+html {
+	background: var(--bg);
+	padding: 0;
+	margin: 0;
+}
+* {
+	transition: background 0.3s ease-in-out;
 }
