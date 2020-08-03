@@ -1,16 +1,15 @@
-/* :root {
-	--text-color: white;
-	--user-bg: rgb(1, 132, 255);
-	--other-bg: rgb(212, 212, 212);
-} */
 .message {
 	width: fit-content;
 	max-width: 80vw;
 	margin: 2px 5px;
+	animation: pop 0.3s ease-in-out;
 }
 .message__user {
 	margin-left: auto;
 	transform-origin: bottom right;
+}
+.message__user.last {
+	transform-origin: top right;
 }
 .message .message__content {
 	transition: all 0.3s ease-in-out;
@@ -19,10 +18,8 @@
 	color: var(--light-text) !important;
 	background: var(--user-bg) !important;
 	padding: 15px;
-	border-radius: 30px;
+	border-radius: 30px 2px 2px 30px;
 	text-align: left !important;
-	border-bottom-right-radius: 2px;
-	border-top-right-radius: 2px;
 }
 
 .message__user.first .message__content {
@@ -46,6 +43,10 @@
 	margin-right: auto;
 	transform-origin: bottom left;
 }
+.message__guest.last {
+	transform-origin: top left;
+}
+
 .message__guest .message__content {
 	color: var(--dark-text) !important;
 	background: var(--other-bg) !important;
@@ -64,4 +65,14 @@
 	display: none;
 	color: gray;
 	text-align: left;
+	text-transform: capitalize;
+}
+@keyframes pop {
+	from {
+		transform: scale(0);
+		opacity: 0.1;
+	}
+	to {
+		transform: scale(1);
+	}
 }

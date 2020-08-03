@@ -14,7 +14,12 @@ function App() {
 	const [messages, setMessages] = useState<any[]>([]);
 
 	useEffect(() => {
-		// setUserName(prompt('user name ?')!);
+		// userName
+		const name = localStorage.getItem('userName');
+		if (name) {
+			setUserName(name);
+		}
+		// messages from db
 		setTimeout(() => {
 			db.collection('messages')
 				.orderBy('timestamp')
@@ -26,13 +31,20 @@ function App() {
 	useEffect(() => {
 		if (bottomRef) bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
 	}, [messages]);
+	useEffect(() => {
+		localStorage.setItem('userName', userName);
+	}, [userName]);
 
 	const bottomRef = useRef<HTMLDivElement>(null);
 	return (
 		<div className='App'>
 			<ThemeContextProvider>
-				<Nav userName={userName}></Nav>
-
+				<Nav
+					userName={userName}
+					disconnect={() => {
+						setUserName('');
+					}}
+				></Nav>
 				{!userName && <Login setUserName={setUserName}></Login>}
 				{userName && (
 					<>

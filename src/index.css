@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 :root {
-	--bg: white;
+	--bg: #eee;
 	--light-opacity: rgba(246, 246, 246, 0.9);
 	--light-text: white;
 	--dark-text: rgb(0, 0, 0);

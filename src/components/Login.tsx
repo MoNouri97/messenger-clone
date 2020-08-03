@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Input, TextField, Button } from '@material-ui/core';
+import { Box, TextField, Button } from '@material-ui/core';
 
 const Login: React.FC<{ setUserName: (name: string) => void }> = ({
 	setUserName,
@@ -8,22 +8,25 @@ const Login: React.FC<{ setUserName: (name: string) => void }> = ({
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		setName(e.target.value);
 	};
-	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
+	const handleSubmit = () => {
 		setUserName(name);
+		localStorage.setItem('userName', name);
 	};
 	return (
-		<Box>
+		<Box style={{ marginTop: '50px', padding: '10px' }}>
 			<form onSubmit={handleSubmit} style={style}>
 				<TextField
 					className='app__form-grp'
 					name='name'
-					placeholder='new message'
 					value={name}
 					onChange={handleChange}
 					label='Name'
 					variant='filled'
 				/>
-				<Button type='submit'>Ok</Button>
+				<div>
+					<Button type='submit'>Ok</Button>
+				</div>
 			</form>
 		</Box>
 	);

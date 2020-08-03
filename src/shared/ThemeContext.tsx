@@ -8,28 +8,31 @@ export const ThemeContext = createContext<
 	}>
 >({});
 
-const dark = {
+type theme = { [key: string]: string };
+const dark: theme = {
 	'--bg': '#222',
 	'--light-opacity': 'rgba(29, 32, 33, 0.9)',
 	'--light-text': 'rgb(224, 224, 224)',
 	'--dark-text': 'rgb(224, 224, 224)',
 	'--user-bg': 'rgb(1, 132, 255)',
 	'--other-bg': 'rgb(48, 52, 54)',
-	'	--shadow': 'rgba(108, 108, 108, 0.34)',
+	'--shadow': 'rgba(0, 0, 0, 0.7)',
 };
-const light: { [key: string]: string } = {
-	'--bg': 'white',
+const light: theme = {
+	'--bg': '#eee',
 	'--light-opacity': 'rgba(246, 246, 246, 0.9)',
 	'--light-text': 'white',
 	'--dark-text': 'black',
 	'--user-bg': 'rgb(1, 132, 255)',
 	'--other-bg': 'rgb(212, 212, 212)',
-	'	--shadow': 'rgba(0, 0, 0, 0.253)',
+	'--shadow': 'rgba(0, 0, 0, 0.253)',
 };
 const applyTheme = (nextTheme: string) => {
 	const theme = nextTheme === 'light' ? light : dark;
 	Object.keys(theme).map(key => {
 		const value = theme[key];
+		console.log(key);
+
 		document.documentElement.style.setProperty(key, value);
 	});
 };

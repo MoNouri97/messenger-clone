@@ -1,20 +1,37 @@
 import React, { useContext, useEffect } from 'react';
-import { Button } from '@material-ui/core';
+import { Button, IconButton } from '@material-ui/core';
 import { ThemeContext } from '../shared/ThemeContext';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import Brightness4Icon from '@material-ui/icons/Brightness4';
 
-const Nav: React.FC<{ userName?: string }> = ({ userName }) => {
+interface Props {
+	userName?: string;
+	disconnect: () => void;
+}
+const Nav: React.FC<Props> = ({ userName, disconnect }) => {
 	const { theme, toggleTheme } = useContext(ThemeContext);
 
 	return (
 		<div className='nav' style={tileBar}>
 			<h1 style={{ flex: 1, margin: 0 }}>👋 Hello {userName || 'there'}</h1>
-			<Button
+
+			<IconButton
 				onClick={() => {
 					toggleTheme!();
 				}}
 			>
-				{(theme === 'light' ? 'dark' : 'light') + ' theme'}
-			</Button>
+				<Brightness4Icon />
+			</IconButton>
+			{userName && (
+				<IconButton
+					onClick={() => {
+						disconnect();
+					}}
+					color='primary'
+				>
+					<ExitToAppIcon />
+				</IconButton>
+			)}
 		</div>
 	);
 };
@@ -31,4 +48,5 @@ const tileBar: React.CSSProperties | undefined = {
 	margin: 0,
 	display: 'flex',
 	justifyContent: 'center',
+	boxShadow: '1px 1px 10px var(--shadow)',
 };

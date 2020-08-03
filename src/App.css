@@ -23,6 +23,7 @@
 }
 Button {
 	color: var(--dark-text) !important;
+	text-transform: capitalize !important;
 }
 Input,
 TextField,
